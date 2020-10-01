@@ -1,0 +1,15 @@
+.main{
+ width: 90%;
+ background-image: linear-gradient(to right, #3498db , #8e44ad);
+ height: 80%;
+ 
+ margin-top: 5%;
+ 
+margin: auto;
+}
+.chatRoom{
+  float: right;
+  width: 50%;
+  height:94%;
+  overflow-y: scroll;
+}

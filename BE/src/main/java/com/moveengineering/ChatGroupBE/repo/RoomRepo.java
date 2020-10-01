@@ -1,0 +1,13 @@
+package com.moveengineering.ChatGroupBE.repo;
+
+
+import com.moveengineering.ChatGroupBE.model.RoomModel;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface RoomRepo extends MongoRepository<RoomModel,String> {
+
+
+
+}
