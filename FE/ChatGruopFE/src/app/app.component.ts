@@ -17,10 +17,15 @@ export class AppComponent {
   newmessage: string;
   private stompClient = null;
 
+    username: string =null;
+ enterName = false;
+
   constructor(){}
 
   ngOnInit() {
     this.connect();
+    this.enterName =false;
+    this.username = null;
   }
 
   setConnected(connected: boolean) {
@@ -42,26 +47,31 @@ export class AppComponent {
       _this.stompClient.subscribe('/start/initial', function (hello) {
         console.log(JSON.parse(hello.body));
         
-        _this.showMessage(JSON.parse(hello.body));
+        
       });
     });
   }
+   createChat(){
+     this.username = null;
+     this.enterName = true;
 
-  sendMessage() {
+   }
+
+  // sendMessage() {
     
-    this.stompClient.send(
-      '/current/resume',
-      {},
-      JSON.stringify(this.newmessage)
-    );
-    this.newmessage = "";
+  //   this.stompClient.send(
+  //     '/current/chatRoom',
+  //     {},
+  //     JSON.stringify(this.newmessage)
+  //   );
+  //   this.newmessage = "";
 
-  }
+  // }
 
-  showMessage(message) {
+  // showMessage(message) {
     
-      this.greetings.push(message);
+  //     this.greetings.push(message);
 
-  }
+  // }
 
 }

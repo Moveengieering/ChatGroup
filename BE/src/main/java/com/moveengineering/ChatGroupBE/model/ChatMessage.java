@@ -12,9 +12,9 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Builder
-public class ChatModel {
+public class ChatMessage {
 
     private UUID id;
     private String content;
@@ -22,7 +22,10 @@ public class ChatModel {
     private String senderName;
     private Date timestamp = new Date();
 
-
+public ChatMessage(){
+    UUID uuid = UUID.randomUUID();
+    this.id = uuid;
+}
 
 
 
