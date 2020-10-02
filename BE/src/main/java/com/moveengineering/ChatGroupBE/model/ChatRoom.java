@@ -13,14 +13,14 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Document
-public class RoomModel {
+public class ChatRoom {
 
 
 
     @Id
     private String id;
     private String chatName;
-    private List<ChatModel> messages;
+    private List<ChatMessage> messages;
 
 
 }
