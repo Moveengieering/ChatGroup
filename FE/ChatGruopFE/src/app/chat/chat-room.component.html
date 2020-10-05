@@ -1,0 +1,91 @@
+<div class="App">
+    <aside class="sidebar left-sidebar">
+        <section class="join-chat" *ngIf="!userIsJoined">
+            <h4 >Join Chat</h4>
+            <h4 *ngIf="existChatRoomWithThisName">Exist user with this name! Try again.</h4>
+            <form (ngSubmit)="createNewChatRoom()">
+                <input placeholder="Enter your username..." type="text" name="username" [(ngModel)]="userName">
+                
+                <br/>
+                <br/>
+                <button mat-raised-button type="submit" class="btn">Join Chat</button>
+            </form>
+        </section>
+        <section *ngIf="userIsJoined" class="room-members">
+            <h4>Room User</h4>
+            <ul class="user-list">
+                <li *ngFor="let chatRoom of allChatRooms">
+                    <span class="presence online"> </span>
+                    <span >
+                        {{chatRoom.chatName}}
+                    </span>
+                </li>
+            </ul>
+
+        </section>
+    </aside>
+    <main class="chat-window">
+        <header class="chat-header">
+            <h4 *ngIf="currentRoom && currentRoom.chatName roomName"> Chat</h4>
+            <ng-template #roomName>
+                <h4>{{currentRoom.chatName}}</h4>
+            </ng-template>
+            <span class="participants"></span>
+        </header>
+        <section class="chat-session">
+            <ul class="message-list">
+                <li class="user-message" *ngFor="let message of messages">
+                    <span class="user-id">{{message.senderName}}</span>
+                    <span >{{message.content}}</span>
+                </li>
+            </ul>
+        </section>
+        <footer *ngIf="userName" class="chat-footer">
+            <form class="message-form" (ngSubmit)="sendMessage()">
+                <input class="message-form" type="text" placeholder="Type a message. Pres Enter to send" name="message"
+                [(ngModel)]="newMessage">
+
+            </form>
+
+        </footer>
+    </main>
+
+    <aside class="sidebar right-sidebar">
+    </aside>
+    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div *ngIf="!userIsJoined" class="join-div">
+
+
+    <div class="join-container">
+        <header class="join-header">
+            <h1><mat-icon>message</mat-icon> Chat Applicaton</h1>
+        </header>
+        <main class="join-main">
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" [(ngModel)]="userName"  placeholder="Enter username..." required />
+            </div>
+            <button mat-raised-button type="submit" class="btn" (click)="createNewChatRoom()" >Join Chat</button>
+        </main>
+    </div>
+</div>
+<div *ngIf="userIsJoined">
+    <app-chat-message [userName]="userName"></app-chat-message>
+</div> -->

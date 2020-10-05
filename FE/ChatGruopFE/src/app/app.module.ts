@@ -1,30 +1,33 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ChatComponent } from './chat/chat.component';
-import { FormsModule } from '@angular/forms';
-
-
+import {MatIconModule} from '@angular/material/icon';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ChatRoomComponent} from './chat/chat-room.component';
+import {FormsModule} from '@angular/forms';
+import { ChatMessageComponent } from './chat-message/chat-message.component';
 
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
-      ChatComponent
-   ],
+    ChatRoomComponent,
+    ChatMessageComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

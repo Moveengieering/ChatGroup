@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ChatGroupBeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ChatGroupBeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ChatGroupBeApplication.class, args);
+    }
 
 }

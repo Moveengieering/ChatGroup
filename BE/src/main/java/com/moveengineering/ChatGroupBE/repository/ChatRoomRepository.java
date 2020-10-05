@@ -9,11 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ChatRoomRepository extends MongoRepository<ChatRoom,String> {
+public interface ChatRoomRepository extends MongoRepository<ChatRoom, String> {
     //Optional<ChatRoom> findBySenderIdAndRecipientId(String senderId, String recipientId);
 
     List<ChatRoom> findBychatNameNotLike(String userName);
 
 
-
+    List<ChatRoom> findByChatNameEquals(String userName);
+    ChatRoom findChatRoomById(String id);
 }

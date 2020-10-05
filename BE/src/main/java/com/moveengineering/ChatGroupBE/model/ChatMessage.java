@@ -22,12 +22,10 @@ public class ChatMessage {
     private String senderName;
     private Date timestamp = new Date();
 
-public ChatMessage(){
-    UUID uuid = UUID.randomUUID();
-    this.id = uuid;
-}
-
-
+    public ChatMessage() {
+        UUID uuid = UUID.randomUUID();
+        this.id = uuid;
+    }
 
 
 }
