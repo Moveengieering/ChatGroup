@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class ChatRoomService {
 
@@ -18,11 +19,12 @@ public class ChatRoomService {
     }
 
     public ChatRoom findChatRoomById(String idChatRoom) {
-        return findChatRoomById(idChatRoom);
+        return chatRoomRepository.findChatRoomById(idChatRoom);
     }
 
 
     public void updateChatRoom(ChatRoom chatRoom) {
+
         chatRoomRepository.save(chatRoom);
     }
 
@@ -32,5 +34,18 @@ public class ChatRoomService {
 
     public List<ChatRoom> findOtherChatRooms(String userName) {
         return chatRoomRepository.findBychatNameNotLike(userName);
+    }
+
+    public ChatRoom findChatRoomByChatName(String userName) {
+        ChatRoom result = null;
+        try{
+            List<ChatRoom> list = chatRoomRepository.findByChatNameEquals(userName);
+            if(list != null && list.size() > 0){
+                result = list.get(0);
+            }
+        }catch(Exception e){
+           System.out.println(e);
+        }
+        return result;
     }
 }
