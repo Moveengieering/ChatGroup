@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>{{data.id}}</h2>
+<form action="/action_page.php">
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname" [(ngModel)]="userName"><br><br>
+  <button (click)="enterUsername(userName)">Add</button>
+</form>

@@ -9,13 +9,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ChatRoomComponent} from './chat/chat-room.component';
 import {FormsModule} from '@angular/forms';
 import { ChatMessageComponent } from './chat-message/chat-message.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatRoomComponent,
-    ChatMessageComponent
+    ChatMessageComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,8 @@ import { ChatMessageComponent } from './chat-message/chat-message.component';
     MatCardModule,
     MatButtonModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

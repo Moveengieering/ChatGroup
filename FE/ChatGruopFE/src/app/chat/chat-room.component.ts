@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import { Observable } from 'rxjs';
 import { ChatMessage } from '../domain/chatMessage';
 import { ChatRoom } from '../domain/chatRomm';
 import { ChatService } from '../services/chat/chat.service';
-import {SocketClientService} from '../services/websocket/socket-client.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-chat-room',
@@ -12,7 +12,7 @@ import {SocketClientService} from '../services/websocket/socket-client.service';
 })
 export class ChatRoomComponent implements OnInit {
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService, public dialog: MatDialog) {
   }
 
   userName: string;
@@ -35,6 +35,13 @@ export class ChatRoomComponent implements OnInit {
    this.getAllChatRooms();
 
   }
+  openUserPopup(){
+    this.dialog.open(DialogComponent, {data: this.currentRoom});
+    
+  }
+  
+  
+  
 
   getAllChatRooms(){
     this.chatService.getChatRoomList().subscribe(chats =>{
