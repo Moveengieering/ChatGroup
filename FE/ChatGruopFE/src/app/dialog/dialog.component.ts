@@ -19,7 +19,7 @@ export class DialogComponent implements OnInit {
   }
   enterUsername(){
     this.data.senderName = this.userName;
-    console.log(this.userName);
+    console.log("HELLLLLL", this.data);
    
   }
 
