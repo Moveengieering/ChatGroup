@@ -4,17 +4,17 @@
             <h4 >Join Chat</h4>
             <h4 *ngIf="existChatRoomWithThisName">Exist user with this name! Try again.</h4>
             <form (ngSubmit)="createNewChatRoom()">
-                <input placeholder="Enter your username..." type="text" name="username" [(ngModel)]="userName">
+                <input placeholder="Enter your chat name" type="text" name="username" [(ngModel)]="userName">
                 
                 <br/>
                 <br/>
-                <button mat-raised-button type="submit" class="btn">Join Chat</button>
+                <button mat-raised-button type="submit" class="btn">Create Room</button>
             </form>
         </section>
-        <section *ngIf="userIsJoined" class="room-members">
-            <h4>Room User</h4>
+        <section>
+            <h4>Chat Rooms</h4>
             <ul class="user-list">
-                <li *ngFor="let chatRoom of allChatRooms">
+                <li *ngFor="let chatRoom of allChatRooms" (click)="openModal()">
                     <span class="presence online"> </span>
                     <span >
                         {{chatRoom.chatName}}

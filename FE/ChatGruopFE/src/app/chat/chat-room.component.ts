@@ -4,15 +4,17 @@ import { ChatMessage } from '../domain/chatMessage';
 import { ChatRoom } from '../domain/chatRomm';
 import { ChatService } from '../services/chat/chat.service';
 import {SocketClientService} from '../services/websocket/socket-client.service';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 @Component({
   selector: 'app-chat-room',
   templateUrl: './chat-room.component.html',
   styleUrls: ['./chat-room.component.scss']
 })
 export class ChatRoomComponent implements OnInit {
+  currDiv: string;
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService, public dialog: MatDialog) {
   }
 
   userName: string;
@@ -24,17 +26,33 @@ export class ChatRoomComponent implements OnInit {
   currentRoom : ChatRoom;
   messages: ChatMessage[];
   newMessage: string;// take the text of the mesage
-
+  name: string;
   ngOnInit() {
-    this.userIsJoined = false;
-    this.userName = null;
-    this.currentRoom = null;
-    this.messages = null;
-    this.newMessage = null;
-   this.existChatRoomWithThisName = false;
+  //   this.userIsJoined = false;
+  //   this.userName = null;
+  //   this.currentRoom = null;
+  //   this.messages = null;
+  //   this.newMessage = null;
+  //  this.existChatRoomWithThisName = false;
    this.getAllChatRooms();
 
+
   }
+
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+    id: 1,
+  
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+    console.log("Dialog was closed" )
+    console.log(result)
+    });
+    }
 
   getAllChatRooms(){
     this.chatService.getChatRoomList().subscribe(chats =>{
@@ -43,7 +61,9 @@ export class ChatRoomComponent implements OnInit {
 
     console.log("ChatComponent.allCatRooms:", this.allChatRooms);
   }
-
+  ShowDiv(divVal: string) {
+    this.currDiv = divVal;
+  }
   createNewChatRoom(){
     console.log("createNewChatRoom:", this.currentRoom);
     this.existChatRoomWithThisName = false;
