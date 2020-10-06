@@ -33,7 +33,7 @@ public class ChatRoomService {
     }
 
     public List<ChatRoom> findOtherChatRooms(String userName) {
-        return chatRoomRepository.findBychatNameNotLike(userName);
+        return chatRoomRepository.findByChatNameNotLike(userName);
     }
 
     public ChatRoom findChatRoomByChatName(String userName) {

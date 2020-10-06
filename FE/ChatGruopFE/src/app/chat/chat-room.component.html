@@ -1,6 +1,6 @@
 <div class="App">
   <aside class="sidebar left-sidebar">
-    <section class="join-chat" *ngIf="!userIsJoined">
+    <!-- <section class="join-chat" *ngIf="!userIsJoined">
       <h4>Create Chat</h4>
       <h4 *ngIf="existChatRoomWithThisName">
         Exist user with this name! Try again.
@@ -16,14 +16,14 @@
         <br />
         <button mat-raised-button type="submit" class="btn">Create Chat</button>
       </form>
-    </section>
-    <section *ngIf="userIsJoined" class="room-members">
+    </section> -->
+    <section class="room-members">
       <h4>Room User</h4>
        <ul class="user-list">
-        <li *ngFor="let chatRoom of allChatRooms" (click)="openUserPopup()">
+        <li *ngFor="let user of usersList">
           <span class="presence online"> </span>
           <span>
-            {{ chatRoom.chatName }}
+            {{ user }}
           </span>
         </li>
       </ul>
@@ -32,7 +32,7 @@
   </aside>
   <main class="chat-window">
     <header class="chat-header">
-      <h4 *ngIf="currentRoom && currentRoom.chatName; roomName">Chat</h4>
+      <h4 *ngIf="!currentRoom; else roomName">Chat</h4>
       <ng-template #roomName>
         <h4>{{ currentRoom.chatName }}</h4>
       </ng-template>
@@ -41,12 +41,14 @@
     <section class="chat-session">
       <ul class="message-list">
         <li class="user-message" *ngFor="let message of messages">
-          <span class="user-id">{{ message.senderName }}</span>
+          <span class="user-id">{{ message.senderName }}
+            <span class="user-id">{{ message.timestamp }}</span>
+          </span>
           <span>{{ message.content }}</span>
         </li>
       </ul>
     </section>
-    <footer *ngIf="userName" class="chat-footer">
+    <footer *ngIf="currentUser" class="chat-footer">
       <form class="message-form" (ngSubmit)="sendMessage()">
         <input
           class="message-form"
@@ -58,25 +60,41 @@
       </form>
     </footer>
   </main>
-  <aside class="sidebar right-sidebar"></aside>
-</div>
 
-<!-- <div *ngIf="!userIsJoined" class="join-div">
-
-
-    <div class="join-container">
-        <header class="join-header">
-            <h1><mat-icon>message</mat-icon> Chat Applicaton</h1>
-        </header>
-        <main class="join-main">
-            <div class="form-control">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" [(ngModel)]="userName"  placeholder="Enter username..." required />
+  <aside class="sidebar right-sidebar">
+    <section class="room-section">
+      <section class="user-rooms" *ngIf="currentUser">
+        <h4>Rooms</h4>
+        <ul class="room-list">
+          <li *ngFor="let chatRoom of allChatRooms"> 
+            <div class="room" [class.active]="currentRoom.id === chatRoom.id" (click)="joinToSelectedRoom(chatRoom.id)" >
+              <span>🌐
+                <span class="room-name">{{chatRoom.chatName}}</span>
+              </span>
             </div>
-            <button mat-raised-button type="submit" class="btn" (click)="createNewChatRoom()" >Join Chat</button>
-        </main>
-    </div>
+          </li>
+        </ul>
+      </section>
+      <!-- <section *ngIf="joinableRooms.length  === 0" class="joinable-rooms">
+      <h4>Joinable rooms</h4>;
+      <ul class="room-list">
+         <li *ngFor="let room of joinableRooms">
+           <div class="room" (click)="joinRoom(room.id)">
+             <span class="room-name">{{ room.name }}</span>
+           </div>
+         </li>
+       </ul>
+      </section>-->
+    </section> 
+    <section *ngIf="currentUser" class="create-room">
+      <h4 *ngIf="existChatRoomWithThisName">
+        Exist ChatRoom with this name! Try again.
+      </h4>
+      <form (ngSubmit)="createnewChatRoom()">
+        <input type="text" [(ngModel)]="newChatRoom" name="room-name" id="room-name" placeholder="Create a new ChatRoom">
+      </form>
+    </section>
+  
+
+  </aside>
 </div>
-<div *ngIf="userIsJoined">
-    <app-chat-message [userName]="userName"></app-chat-message>
-</div> -->

@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Key } from 'protractor';
+
 
 @Component({
   selector: 'app-dialog',
@@ -17,10 +19,15 @@ export class DialogComponent implements OnInit {
     
     
   }
-  enterUsername(){
+  enterUsername(user: string){
+    this.userName = user;
     this.data.senderName = this.userName;
     console.log("HELLLLLL", this.data);
    
+    localStorage.setItem("", this.userName );
+      
+      
+    
   }
 
 }

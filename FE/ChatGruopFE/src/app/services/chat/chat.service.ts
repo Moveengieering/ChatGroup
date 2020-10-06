@@ -27,18 +27,22 @@ export class ChatService {
     return this.socketClient.onMessage(`/app/otherchat/${username}/get`);
   }
 
-  getChatRoomByChatname(chatName: string): Observable<ChatRoom> {
+  getChatRoomByChatName(chatName: string): Observable<ChatRoom> {
     return this.socketClient.onMessage(`/app/chat/${chatName}/get`);   
+  }
+
+  getChatRoomById(idChatRoom: string): Observable<ChatRoom> {
+    return this.socketClient.onMessage(`/app/chatById/${idChatRoom}/get`);   
   }
 
   createNewChatRoom(username: string): Observable<ChatRoom> {
      this.socketClient._send(`/app/createChat/${username}`);
-    return this.getChatRoomByChatname(username);
+    return this.getChatRoomByChatName(username);
   }
 
-  createNewMessage(idChatRoom: string, message: any){
-    
-    return this.socketClient.send(`/app/createMessage/${idChatRoom}`, message);
+  createNewMessage(idChatRoom: string, message: any): Observable<any>{
+    this.socketClient.send(`/app/createMessage/${idChatRoom}`, message);
+    return this.socketClient.onMessage("/topic/chat/get");
 
   }
   updateMessage(idChatRoom: string, chatMessage: any){

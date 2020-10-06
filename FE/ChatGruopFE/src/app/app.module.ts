@@ -11,6 +11,8 @@ import {FormsModule} from '@angular/forms';
 import { ChatMessageComponent } from './chat-message/chat-message.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
+import { ChatUserComponent } from './chat-user/chat-user.component';
+
 
 
 
@@ -19,7 +21,8 @@ import { DialogComponent } from './dialog/dialog.component';
     AppComponent,
     ChatRoomComponent,
     ChatMessageComponent,
-    DialogComponent
+    DialogComponent,
+    ChatUserComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { DialogComponent } from './dialog/dialog.component';
     MatButtonModule,
     FormsModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

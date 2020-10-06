@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.websocket.server.PathParam;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -61,6 +62,17 @@ public class ChatController {
         }
         return chatRoom;
     }
+
+    @SubscribeMapping("/chatById/{idChatRoom}/get")
+    public ChatRoom findChatRoomById(@DestinationVariable String idChatRoom) {
+        ChatRoom chatRoom = null;
+        try {
+            chatRoom = chatRoomService.findChatRoomById(idChatRoom);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return chatRoom;
+    }
     //create new Chat Room
     @MessageMapping("/createChat/{userName}")
     @SendTo("/topic/chat/get")
@@ -75,13 +87,14 @@ public class ChatController {
     //create New Message
     @MessageMapping("/createMessage/{idChatRoom}")
     @SendTo("/topic/chat/get")
-    public ChatRoom createNewMessage(@DestinationVariable String idChatRoom, String message) throws Exception{
+    public ChatMessage createNewMessage(@DestinationVariable String idChatRoom, ChatMessage message) throws Exception{
         // find the chatRoomById
         ChatRoom chatRoom = chatRoomService.findChatRoomById(idChatRoom);
         ChatMessage chatMsg = new ChatMessage();
 
-        chatMsg.setContent(message);
-        chatMsg.setSenderName(chatRoom.getChatName());// vendos senderName userin qe ka krjuar chatin te cilin e kam ruajtur edhe si chatname
+        chatMsg.setContent(message.getContent());
+        chatMsg.setSenderName(message.getSenderName());
+        chatMsg.setTimestamp(new Date());
 
         List<ChatMessage> messages = chatRoom.getMessages();
         if(messages == null){
@@ -91,7 +104,7 @@ public class ChatController {
 
         chatRoom.setMessages(messages);// shtoj messazhin e ri tek lista  e messazhve te chatRoom
         chatRoomService.updateChatRoom(chatRoom);// bej save modifikimin e chatRoom
-        return chatRoom;
+        return chatMsg;
     }
 
     @MessageMapping("/updateMessage/{idChatRoom}")

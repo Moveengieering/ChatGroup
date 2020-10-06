@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ChatRoomRepository extends MongoRepository<ChatRoom, String> {
     //Optional<ChatRoom> findBySenderIdAndRecipientId(String senderId, String recipientId);
 
-    List<ChatRoom> findBychatNameNotLike(String userName);
+    List<ChatRoom> findByChatNameNotLike(String userName);
 
 
     List<ChatRoom> findByChatNameEquals(String userName);
