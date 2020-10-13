@@ -59,8 +59,10 @@ performUpload(message: ChatMessage) {
             res => {
             this.imageSrc = res;
             this.sendMessage();
-            
-  }
+            return this.imageSrc = null;
+
+    // return this.imageSrc = null;        
+  } 
 );
 }
 
