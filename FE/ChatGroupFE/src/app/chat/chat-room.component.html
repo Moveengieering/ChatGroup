@@ -1,0 +1,95 @@
+<div class="App">
+  <aside class="sidebar left-sidebar">
+    <section class="room-members">
+      <h4>Room User</h4>
+          <span>
+            {{ currentUser }}
+          </span>
+
+    </section>
+  </aside>
+
+
+
+
+  <main class="chat-window">
+    <header class="chat-header">
+      <h4 *ngIf="!currentRoom; else roomName">Chat</h4>
+      <ng-template #roomName>
+        <h4>{{ currentRoom.chatName }}</h4>
+      </ng-template>
+      <span class="participants"></span>
+    </header>
+    <section class="chat-session">
+      <ul class="message-list" *ngIf="messages" >
+        <li class="user-message" *ngFor="let message of messages">
+          <span class="user-id">{{ message.senderName }}
+            <span class="user-id">{{ message.timestamp | date: 'short' }}</span>
+          </span>
+          <span (click)="initModifyMessage(message)">{{ message.content}} </span>
+          <!-- <img *ngIf="{{message.filePath}}" src="{{message.filePath}}" >  -->
+        </li>
+      </ul>
+    </section>
+    <footer *ngIf="currentUser" class="chat-footer">
+
+  
+      <div class="images">
+
+        <form>
+        <input type="file" (change)="onSelectFile($event)">
+        <br>
+        <br>
+        <button  type="button" (click)="performUpload()">Submit your choice</button>
+        </form>
+        <div *ngIf="imageSrc">
+        <img width="100px" height="50px" src="{{imageSrc}}">
+        
+      <a href="{{imageSrc}}">{{imageSrc}}</a>  
+     
+      </div>
+
+
+
+
+      </div>
+
+        <form class="message-form" enctype="multipart/form-data" (ngSubmit)="sendMessage()"> <input
+          class="message-form"
+          type="text"
+          placeholder="Type a message. Pres Enter to send"
+          name="message"
+          [(ngModel)]="newMessage">
+
+      </form>
+    </footer>
+  </main>
+
+  <aside class="sidebar right-sidebar">
+    <section class="room-section">
+      <section class="user-rooms" *ngIf="currentUser">
+        <h4>Rooms</h4>
+        <ul class="room-list" *ngIf="currentRoom">
+          <li *ngFor="let chatRoom of allChatRooms">
+            <div class="room" [class.active]="currentRoom.id === chatRoom.id" (click)="joinToSelectedRoom(chatRoom.id)" >
+              <span>🌐
+                <span class="room-name">{{chatRoom.chatName}}</span>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </section>
+
+    <section *ngIf="currentUser" class="create-room">
+      <h4 *ngIf="existChatRoomWithThisName">
+        Exist ChatRoom with this name! Try again.
+      </h4>
+      <form (ngSubmit)="createnewChatRoom()">
+        <input type="text" [(ngModel)]="newChatRoom" name="room-name" id="room-name" placeholder="Create a new ChatRoom">
+      </form>
+    </section>
+
+
+  </aside>
+</div>

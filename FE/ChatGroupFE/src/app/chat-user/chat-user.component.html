@@ -1,0 +1,19 @@
+<div class="join-div" *ngIf="!userIsJoined">
+    <div class="join-container">
+        <header class="join-header">
+            <h1><mat-icon>message</mat-icon> Chat Applicaton</h1>
+        </header>
+        <main class="join-main">
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" [(ngModel)]="userName"  placeholder="Enter username..." required />
+            </div>
+            <button mat-raised-button type="submit" class="btn" (click)="addUser()" >Join Chat</button>
+        </main>
+    </div>
+</div>
+<div *ngIf="userIsJoined">
+    <app-chat-room
+    [currentUser]="userName"
+    ></app-chat-room>
+</div>
