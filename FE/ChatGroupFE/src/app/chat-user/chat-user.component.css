@@ -14,13 +14,8 @@
     height: 94%;
     overflow-y: scroll;
   }
-  
-  * {
-      box-sizing: border-box;
-      margin: 1px;
-      padding: 1px;
-  }
-  
+ 
+
   .btn {
       cursor: pointer;
       padding: 5px 15px;
